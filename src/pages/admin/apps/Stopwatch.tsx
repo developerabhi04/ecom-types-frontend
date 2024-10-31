@@ -20,7 +20,7 @@ const Stopwatch = () => {
     const [isRunning, setIsRunning] = useState<boolean>(false);
 
     useEffect(() => {
-        let intervalID: ReturnType<typeof setInterval>; // Correct type here
+        let intervalID: NodeJS.Timeout | number;
 
         if (isRunning) {
             intervalID = setInterval(() => {
