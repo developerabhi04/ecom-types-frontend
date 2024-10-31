@@ -42,17 +42,25 @@ const CheckOutForm = () => {
         e.preventDefault();
 
         if (!stripe || !elements) return;
+
+        // Check if user and user._id exist
+        if (!user || !user._id) {
+            toast.error("User not found or invalid. Please log in.");
+            setIsProcessing(false);
+            return;
+        }
+
         setIsProcessing(true);
 
         const orderData: NewOrderRequest = {
             shippingInfo,
-            orderItems: cartItems ,
+            orderItems: cartItems,
             subtotal,
             tax,
             discount,
             shippingCharges,
             total,
-            user: user?._id!,
+            user: user._id,
         };
 
 
